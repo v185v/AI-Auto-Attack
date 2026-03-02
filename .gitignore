@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyd
+.pytest_cache/
+.mypy_cache/
+
+# Virtual env
+.venv/
+venv/
+
+# Local env and secrets
+.env
+
+# Build artifacts
+dist/
+build/
+*.egg-info/
+tests/regression/results/
+observability/kpi/
+infra/release_reports/
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+Thumbs.db
+.DS_Store
+
+#others
+workflow/
+reports/
+ai_attack_egg-info/

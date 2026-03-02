@@ -1,0 +1,47 @@
+version: 1
+name: poc_single_target
+description: Minimal LangGraph workflow for single target automated security test flow.
+
+entrypoint: analyze_target
+
+nodes:
+  - name: analyze_target
+    type: analysis
+    description: Validate target scope and generate target analysis context.
+  - name: scan_target
+    type: execution
+    description: Execute scanner stage with automatic Linux/Windows strategy branching and tool selection.
+  - name: llm_decide
+    type: decision
+    description: Use LLM decision engine to generate structured risk hypotheses and next actions.
+  - name: verify_findings
+    type: verification
+    description: Validate findings and produce verification decision.
+  - name: build_report
+    type: reporting
+    description: Build structured workflow report for success or failure.
+
+edges:
+  - from: analyze_target
+    to: scan_target
+    condition: status != failed
+  - from: analyze_target
+    to: build_report
+    condition: status == failed
+  - from: scan_target
+    to: llm_decide
+    condition: status != failed
+  - from: scan_target
+    to: build_report
+    condition: status == failed
+  - from: llm_decide
+    to: verify_findings
+  - from: verify_findings
+    to: build_report
+
+outputs:
+  - status
+  - failure_reason
+  - report
+  - report_artifacts
+  - audit_events

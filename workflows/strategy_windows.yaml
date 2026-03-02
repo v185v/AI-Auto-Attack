@@ -1,0 +1,20 @@
+version: 1
+key: strategy_windows
+name: windows
+match_os: windows
+description: Windows branch with controlled SMB/RDP/WinRM-oriented validation.
+tools:
+  default:
+    - nmap
+  web_checks:
+    - nuclei
+    - zaproxy
+stages:
+  - id: host_service_enumeration
+    goal: Enumerate Windows-relevant services and reachable interfaces.
+    notes:
+      - emphasize SMB/RDP/WinRM fingerprinting under authorization
+  - id: controlled_verification
+    goal: Perform bounded verification for discovered services.
+    notes:
+      - avoid intrusive exploitation unless separately approved

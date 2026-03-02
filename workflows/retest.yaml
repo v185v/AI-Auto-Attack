@@ -1,0 +1,32 @@
+version: 1
+name: retest_single_target
+description: Retest mode for an existing task with focused scan replay and before/after diff report.
+
+entrypoint: load_baseline
+
+nodes:
+  - name: load_baseline
+    type: analysis
+    description: Load baseline task state, report, and finding focus context.
+  - name: run_retest_workflow
+    type: execution
+    description: Re-run workflow for the same target with focused tools/findings.
+  - name: build_diff_report
+    type: reporting
+    description: Generate before/after diff report and persist artifacts.
+
+edges:
+  - from: load_baseline
+    to: run_retest_workflow
+    condition: baseline_loaded == true
+  - from: run_retest_workflow
+    to: build_diff_report
+    condition: retest_executed == true
+
+outputs:
+  - source_task_id
+  - retest_task_id
+  - status
+  - diff_report
+  - diff_artifacts
+  - report

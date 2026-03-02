@@ -1,0 +1,20 @@
+version: 1
+key: strategy_linux
+name: linux
+match_os: linux
+description: Linux branch with service-centric checks and optional web validation.
+tools:
+  default:
+    - nmap
+  web_checks:
+    - nuclei
+    - zaproxy
+stages:
+  - id: service_discovery
+    goal: Enumerate exposed services and versions.
+    notes:
+      - prioritize SSH/HTTP/database service coverage
+  - id: middleware_validation
+    goal: Validate common middleware and web stack risks when web ports are present.
+    notes:
+      - run template and passive web checks in authorized scope

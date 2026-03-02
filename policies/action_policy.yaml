@@ -1,0 +1,23 @@
+version: 1
+
+command_allowlist:
+  low_risk:
+    - nmap
+    - nuclei
+    - zap.sh
+    - zap.bat
+    - zap
+  medium_risk:
+    - nikto
+  high_risk:
+    - msfconsole
+    - netexec
+
+gates:
+  require_scope_check: true
+  require_command_allowlist: true
+  require_approval_for_high_risk: true
+
+defaults:
+  max_command_timeout_seconds: 300
+  block_shell_chaining: true

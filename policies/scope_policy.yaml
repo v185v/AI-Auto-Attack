@@ -1,0 +1,21 @@
+version: 1
+default_decision: deny
+
+authorized_targets:
+  cidr: []
+  hosts: []
+  domains: []
+  api_base_urls: []
+
+restrictions:
+  max_concurrency: 3
+  max_requests_per_minute: 120
+  scan_window:
+    start: "00:00"
+    end: "23:59"
+    timezone: "UTC"
+
+logging:
+  log_all_denied_requests: true
+  include_request_payload_hash: true
+

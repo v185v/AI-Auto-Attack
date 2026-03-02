@@ -1,0 +1,27 @@
+name: ai-attack-release-manifest
+version: 1
+
+required_paths:
+  - README.md
+  - settings.yaml
+  - docs/architecture.md
+  - docs/evidence_schema.md
+  - docs/security_governance.md
+  - docs/secrets_policy.md
+  - docs/cost_control.md
+  - docs/kpi_definition.md
+  - docs/release_checklist.md
+  - docs/demo_playbook.md
+  - docs/acceptance_report_template.md
+  - policies/scope_policy.yaml
+  - policies/action_policy.yaml
+  - workflows/poc_single_target.yaml
+  - workflows/retest.yaml
+  - workflows/multi_stage.yaml
+  - tests/regression/benchmarks/policy.yaml
+  - tests/regression/benchmarks/poc_authorized_target.yaml
+  - tests/regression/benchmarks/poc_scope_denied.yaml
+
+required_commands:
+  - pytest -q
+  - python -m tests.regression.runner --benchmark-dir tests/regression/benchmarks --output-dir tests/regression/results --policy-path tests/regression/benchmarks/policy.yaml

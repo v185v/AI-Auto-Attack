@@ -1,0 +1,23 @@
+name: multi_stage
+description: Multi-node authorized workflow example with dependency ordering.
+
+resource_quota:
+  requested_parallelism: 2
+
+nodes:
+  - id: perimeter_web
+    target: http://10.20.1.8
+    depends_on: []
+    priority: 10
+
+  - id: internal_service
+    target: 10.20.1.20
+    depends_on:
+      - perimeter_web
+    priority: 20
+
+  - id: windows_host
+    target: 10.20.1.30
+    depends_on:
+      - perimeter_web
+    priority: 20

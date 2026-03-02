@@ -1,0 +1,17 @@
+id: poc_scope_denied
+name: Out-of-scope guard enforcement
+description: Ensures unauthorized target execution remains blocked by scope governance.
+workflow: poc_single_target
+target: 172.16.10.8
+requested_by: regression-runner
+tags:
+  - governance
+  - scope
+expected:
+  status: failed
+  min_finding_count: 0
+  min_verified_findings: 0
+  allow_failure_reasons:
+    - scope_denied:target_out_of_scope
+    - scope_denied:ip_out_of_scope
+  max_duration_seconds: 300

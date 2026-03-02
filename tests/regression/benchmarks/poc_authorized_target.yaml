@@ -1,0 +1,14 @@
+id: poc_authorized_target
+name: Authorized target baseline run
+description: Baseline single-target authorized workflow run for KPI trend comparison.
+workflow: poc_single_target
+target: 10.20.1.8
+requested_by: regression-runner
+tags:
+  - poc
+  - baseline
+expected:
+  status: completed
+  min_finding_count: 1
+  min_verified_findings: 0
+  max_duration_seconds: 1800
